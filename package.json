@@ -1,0 +1,44 @@
+{
+  "name": "@mambalabsdev/mcp-ai-tooling-detector",
+  "version": "1.0.0",
+  "description": "MCP server for the Mamba Labs AI Tooling Detector actor on Apify. Give it a company domain and it returns whether the company only declares AI, actually deploys AI tooling on its site, or charges money for AI, with the evidence behind the verdict as flat Clay-ready JSON.",
+  "type": "module",
+  "bin": {
+    "mcp-ai-tooling-detector": "./build/index.js"
+  },
+  "scripts": {
+    "build": "tsc && chmod +x build/index.js",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "ai-detection",
+    "ai-adoption",
+    "tech-stack",
+    "llms-txt",
+    "ai-maturity",
+    "chat-widget",
+    "apify",
+    "clay"
+  ],
+  "author": "Mamba Labs <labs@mambamindsetgrowth.com>",
+  "license": "MIT",
+  "homepage": "https://apify.com/mambalabs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mambalabsdev/mcp-ai-tooling-detector"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.6.0"
+  },
+  "mcpName": "com.mambabuilt/mcp-ai-tooling-detector"
+}

@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "mamba-ai-tooling-detector": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@mambalabsdev/mcp-ai-tooling-detector"
+      ],
+      "env": {
+        "APIFY_TOKEN": "your-apify-token"
+      }
+    }
+  }
+}
