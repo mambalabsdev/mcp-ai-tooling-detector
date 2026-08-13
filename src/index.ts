@@ -127,9 +127,14 @@ server.registerTool(
         .boolean()
         .optional()
         .describe("Force a fresh analysis and ignore the 7 day result cache."),
+      request_timeout_ms: z
+        .number()
+        .int()
+        .optional()
+        .describe("Per-request timeout in milliseconds. 3000 to 20000. Default: 9000."),
     },
   },
-  async ({ domain, domains, check_pricing, skipCache }) => {
+  async ({ domain, domains, check_pricing, skipCache, request_timeout_ms }) => {
     const hasSingle = domain !== undefined && domain !== "";
     const hasBatch = Array.isArray(domains) && domains.length > 0;
     if (!hasSingle && !hasBatch) {
@@ -146,6 +151,7 @@ server.registerTool(
         domains: hasBatch ? domains : undefined,
         check_pricing,
         skipCache,
+        request_timeout_ms,
       }),
     );
   },
