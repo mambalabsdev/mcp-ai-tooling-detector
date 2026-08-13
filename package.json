@@ -1,11 +1,17 @@
 {
   "name": "@mambalabsdev/mcp-ai-tooling-detector",
-  "version": "1.1.0",
-  "description": "MCP server for the Mamba Labs AI Tooling Detector actor on Apify. Give it a company domain and it returns whether the company only declares AI, actually deploys AI tooling on its site, or charges money for AI, with the evidence behind the verdict as flat Clay-ready JSON.",
+  "version": "1.1.1",
+  "description": "MCP server for the Mamba Labs AI Tooling Detector actor on Apify. Give it a company domain and it returns whether the company only talks about AI, actually deploys AI tooling on its site, or charges for AI, with the evidence, as Clay-ready JSON.",
   "type": "module",
   "bin": {
     "mcp-ai-tooling-detector": "./build/index.js"
   },
+  "files": [
+    "build",
+    "README.md",
+    "LICENSE",
+    "SECURITY.md"
+  ],
   "scripts": {
     "build": "tsc && chmod +x build/index.js",
     "prepublishOnly": "npm run build"
