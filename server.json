@@ -2,7 +2,7 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "com.mambabuilt/mcp-ai-tooling-detector",
   "description": "Detect whether a company declares, deploys, or charges for AI, with evidence.",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "repository": {
     "url": "https://github.com/mambalabsdev/mcp-ai-tooling-detector",
     "source": "github"
@@ -11,7 +11,7 @@
     {
       "registryType": "npm",
       "identifier": "@mambalabsdev/mcp-ai-tooling-detector",
-      "version": "1.1.1",
+      "version": "1.2.0",
       "transport": {
         "type": "stdio"
       },

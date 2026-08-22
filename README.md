@@ -76,6 +76,7 @@ Calls consume Apify credits, billed per domain analyzed. Free Apify plans get 15
 |---|---|---|---|
 | `domain` | string | one of these | A single company domain, e.g. `intercom.com`. |
 | `domains` | string[] | one of these | Batch mode. Takes precedence over `domain`. |
+| `vendors` | array | no | Report only these AI vendors, one or more of the 52 fingerprinted tools (`sierra`, `decagon`, `intercom_fin`, `openai_api`, `anthropic_api`, `pinecone`, `langchain` and the rest). The site wide AI maturity read is never narrowed by this. Omit for every vendor. |
 | `check_pricing` | boolean | no | Fetch and score the pricing page. Default true. Setting it false is faster but caps the result at `deployed`, because `commercialized` can only be proven on a pricing page. |
 | `skipCache` | boolean | no | Force a fresh analysis and ignore the 7 day result cache. |
 
