@@ -1,7 +1,7 @@
 {
   "manifest_version": "0.3",
   "name": "mcp-ai-tooling-detector",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "MCP server for the Mamba Labs AI Tooling Detector actor on Apify. Give it a company domain and it returns whether the company only declares AI, actually deploys AI tooling on its site, or charges money for AI, with the evidence behind the verdict as flat Clay-ready JSON.",
   "author": {
     "name": "Mamba Labs"

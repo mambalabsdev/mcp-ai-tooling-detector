@@ -119,6 +119,10 @@ server.registerTool(
         .array(z.string())
         .optional()
         .describe("Batch mode: several company domains analyzed in one call. Takes precedence over domain."),
+      vendors: z
+        .array(z.enum(["sierra", "decagon", "ada", "forethought", "intercom_fin", "ultimate_ai", "netomi", "yellow_ai", "cognigy", "kore_ai", "chatbase", "voiceflow", "sendbird_ai", "intercom", "zendesk", "drift", "gorgias", "freshworks", "tidio", "crisp", "kustomer", "qualified", "hubspot_breeze", "algolia", "glean", "inkeep", "kapa_ai", "mendable", "mutiny", "dynamic_yield", "openai_api", "anthropic_api", "azure_openai", "aws_bedrock", "google_gemini", "cohere", "mistral", "groq", "together_ai", "fireworks_ai", "replicate", "perplexity_api", "huggingface", "openrouter", "cloudflare_ai_gateway", "pinecone", "weaviate", "qdrant", "vercel_ai_sdk", "langchain", "llamaindex", "assistant_ui"]))
+        .optional()
+        .describe("Report only these AI vendors, which turns the actor into competitive intelligence for any one of the 52 fingerprinted tools. Detection is unchanged either way, so a filtered call costs the same. The site wide AI maturity read (ai_maturity, confidence, uses_ai, the llms.txt and robots.txt checks, the pricing score) is never narrowed by this. Omit for every vendor."),
       check_pricing: z
         .boolean()
         .optional()
@@ -127,9 +131,14 @@ server.registerTool(
         .boolean()
         .optional()
         .describe("Force a fresh analysis and ignore the 7 day result cache."),
+      request_timeout_ms: z
+        .number()
+        .int()
+        .optional()
+        .describe("Per-request timeout in milliseconds. 3000 to 20000. Default: 9000."),
     },
   },
-  async ({ domain, domains, check_pricing, skipCache }) => {
+  async ({ domain, domains, vendors, check_pricing, skipCache, request_timeout_ms }) => {
     const hasSingle = domain !== undefined && domain !== "";
     const hasBatch = Array.isArray(domains) && domains.length > 0;
     if (!hasSingle && !hasBatch) {
@@ -144,8 +153,10 @@ server.registerTool(
       compact({
         domain: hasBatch ? undefined : domain,
         domains: hasBatch ? domains : undefined,
+        vendors,
         check_pricing,
         skipCache,
+        request_timeout_ms,
       }),
     );
   },
