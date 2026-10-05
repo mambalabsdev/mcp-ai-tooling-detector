@@ -79,8 +79,12 @@ Calls consume Apify credits, billed per domain analyzed. Free Apify plans get 15
 | `vendors` | array | no | Report only these AI vendors, one or more of the 52 fingerprinted tools (`sierra`, `decagon`, `intercom_fin`, `openai_api`, `anthropic_api`, `pinecone`, `langchain` and the rest). The site wide AI maturity read is never narrowed by this. Omit for every vendor. |
 | `check_pricing` | boolean | no | Fetch and score the pricing page. Default true. Setting it false is faster but caps the result at `deployed`, because `commercialized` can only be proven on a pricing page. |
 | `skipCache` | boolean | no | Force a fresh analysis and ignore the 7 day result cache. |
+| `request_timeout_ms` | integer | no | Per-request timeout in milliseconds, 3000 to 20000. Default 9000. |
+| `batchSize` | integer | no | Batch mode only: how many domains the actor analyzes at once, 1 to 10. Default 5. |
 
 The tool is read-only and idempotent. It never writes anything.
+
+The tool starts the actor run and polls it to a finished status, so a long run is not cut off at 300 seconds. If the run is still going after 30 minutes, the call stops waiting and returns the run ID with a link to it in the Apify Console, where the results land when it finishes. A run that does not succeed comes back as an error with its run ID and status.
 
 ## Full actor documentation
 
