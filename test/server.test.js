@@ -19,7 +19,7 @@ const ACTOR_INPUTS = ["batchSize","check_pricing","domain","domains","request_ti
 const TOOL_INPUTS = ["batchSize","check_pricing","domain","domains","request_timeout_ms","skipCache","vendors"];
 const TOOL_REQUIRED = [];
 const SAMPLE_ARGS = {"domain":"intercom.com"};
-const RUN_QUERY = "";
+const RUN_QUERY = "?timeout=1800";
 
 // Speak MCP over stdio to the built server. extraEnv and preload let a test
 // swap in the fake Apify API from helpers/mock-fetch.mjs.
