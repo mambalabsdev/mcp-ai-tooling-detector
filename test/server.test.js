@@ -14,9 +14,9 @@ const TOOL_NAME = "detect_ai_tooling";
 const ACTOR_ID = "EwkHhmqiuJgRoVEbE";
 // Every input the live actor exposes to a buyer must be exposed by the tool.
 // Excluded by rule: source_tag, qa_test_mode (internal or test only fields).
-const ACTOR_INPUTS = ["batchSize","check_pricing","domain","domains","request_timeout_ms","skipCache","vendors"];
+const ACTOR_INPUTS = ["max_charge_usd","batchSize","check_pricing","domain","domains","request_timeout_ms","skipCache","vendors"];
 // The tool's full input list, so a dropped or renamed parameter fails here.
-const TOOL_INPUTS = ["batchSize","check_pricing","domain","domains","request_timeout_ms","skipCache","vendors"];
+const TOOL_INPUTS = ["max_charge_usd","batchSize","check_pricing","domain","domains","request_timeout_ms","skipCache","vendors"];
 const TOOL_REQUIRED = [];
 const SAMPLE_ARGS = {"domain":"intercom.com"};
 const RUN_QUERY = "?timeout=1800";

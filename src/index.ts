@@ -205,12 +205,13 @@ server.registerTool(
       "Given a company domain, determine how far that company has actually gone with AI. Returns an ai_maturity tier of none, declared (says AI but nothing observable is running), deployed (AI tooling is live on the site), or commercialized (the pricing page charges for AI via credits, tokens, an add-on, an AI-named plan, or a per-outcome price). Also returns the detected AI vendors and categories, validated llms.txt status, robots.txt AI-crawler policy, and the quotable evidence strings behind the verdict. A domain behind a bot challenge comes back with blocked=true at low confidence rather than as a false negative. Public data only, no login. Returns flat Clay-ready JSON. Read-only; requires an APIFY_TOKEN and consumes Apify credits per domain analyzed.",
     annotations: {
       title: "Detect AI Tooling",
-      readOnlyHint: true,
+      readOnlyHint: false,
       destructiveHint: false,
       idempotentHint: true,
       openWorldHint: true,
     },
     inputSchema: {
+      max_charge_usd: z.number().min(0).optional().describe("Optional. The run stops before any charge that would take this run's total past this amount in USD, and every row already charged is kept. Leave it empty to rely only on the maximum cost per run set in Apify, which the actor also honors."),
       domain: z
         .string()
         .optional()
@@ -247,7 +248,7 @@ server.registerTool(
         .describe("Batch mode only: how many domains the actor analyzes at once. 1 to 10. Default: 5."),
     },
   },
-  async ({ domain, domains, vendors, check_pricing, skipCache, request_timeout_ms, batchSize }) => {
+  async ({ domain, domains, vendors, check_pricing, skipCache, request_timeout_ms, batchSize, max_charge_usd }) => {
     const hasSingle = domain !== undefined && domain !== "";
     const hasBatch = Array.isArray(domains) && domains.length > 0;
     if (!hasSingle && !hasBatch) {
@@ -260,6 +261,7 @@ server.registerTool(
       "EwkHhmqiuJgRoVEbE",
       "AI Tooling Detector",
       compact({
+        max_charge_usd,
         domain: hasBatch ? undefined : domain,
         domains: hasBatch ? domains : undefined,
         vendors,
