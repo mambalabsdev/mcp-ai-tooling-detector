@@ -29,6 +29,7 @@ The tier has four levels and each one needs its own class of evidence:
 | `deployed` | AI tooling is running on the site | An AI-native vendor, a direct inference endpoint, or an AI-capable platform backed by AI copy |
 | `declared` | The company says AI, nothing observable | A validated llms.txt, AI crawler rules in robots.txt, or weighted marketing copy |
 | `none` | No signal fired | Nothing |
+| `max_charge_usd` | number | Optional cost cap in USD for this run. The actor stops before an item that could take its charges past this amount. |
 
 A domain sitting behind a bot challenge comes back with `blocked: true` at low confidence rather than as a confident no, so a challenged site is never mistaken for a company with no AI.
 
@@ -82,9 +83,18 @@ Calls consume Apify credits, billed per domain analyzed. Free Apify plans get 15
 | `request_timeout_ms` | integer | no | Per-request timeout in milliseconds, 3000 to 20000. Default 9000. |
 | `batchSize` | integer | no | Batch mode only: how many domains the actor analyzes at once, 1 to 10. Default 5. |
 
-The tool is read-only and idempotent. It never writes anything.
+The tool reads public data and writes nothing, but every call starts a paid Apify run, so it is not marked read only.
 
 The tool starts the actor run and polls it to a finished status, so a long run is not cut off at 300 seconds. The run is allowed 1,800 seconds. If it is still going two minutes after that, the call stops waiting and returns the run ID with a link to it in the Apify Console, where the results land when it finishes. A run that does not succeed comes back as an error with its run ID and status.
+
+## Pricing
+
+Price per event on the Apify FREE plan, from the live pricing record; paid Apify plans pay less per event.
+
+| Event | Price (USD) |
+| --- | --- |
+| Actor start (`actor-start`) | 0.00005 |
+| Domain analyzed (`domain-analyzed`) | 0.003 |
 
 ## Full actor documentation
 
